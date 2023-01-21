@@ -5,7 +5,7 @@
 首先前往 [Vercel 官网](https://vercel.com/)，点击右上角的 sign up 进行注册。
 
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/8391485/1612880174758-059d6e22-d5ec-4478-9b8c-4a9d7c041f44.png)
-
+  
 极有可能遇到的 bug
 
 若注册时提示 `Error:This user account is blocked.Contact support@vercel.com for more information.`
