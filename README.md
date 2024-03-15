@@ -1,3 +1,5 @@
+PS： 2024/3/15 最新修订版 api访问格式由 `https://gcapi.yisous.xyz/api?${username}` 改为 `https://gcapi.yisous.xyz/api?user=${username}`
+
 ## 如果你想部署自用的vercel api
 
 ### ①注册
