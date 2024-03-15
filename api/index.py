@@ -30,11 +30,24 @@ def getdata(name):
         "contributions": datalistsplit
     }
     return returndata
+#class handler(BaseHTTPRequestHandler):
+   # def do_GET(self):
+   #     path = self.path
+    ##    user = path.split('?')[1]
+    #    data = getdata(user)
+    #    self.send_response(200)
+     #   self.send_header('Access-Control-Allow-Origin', '*')
+     #   self.send_header('Content-type', 'application/json')
+     #   self.end_headers()
+     #   self.wfile.write(json.dumps(data).encode('utf-8'))
+     #   return
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        path = self.path
-        user = path.split('?')[1]
-        data = getdata(user)
+        parsed_path = urlparse(self.path)
+        query_params = parse_qs(parsed_path.query)
+        user = query_params.get('user', [None])[0]  # 获取'user'参数的值，如果不存在则默认为None
+        
+        data = getdata(user) if user else {"error": "User parameter not provided"}
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
