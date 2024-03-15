@@ -1,7 +1,6 @@
-# -*- coding: UTF-8 -*-
 import requests
 import re
-from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler,HTTPServer
 import json
 
 def list_split(items, n):
@@ -9,8 +8,9 @@ def list_split(items, n):
 def getdata(name):
     gitpage = requests.get("https://github.com/" + name)
     data = gitpage.text
-    datadatereg = re.compile(r'data-date="(.*?)" data-level')
-    datacountreg = re.compile(r'<span class="sr-only">(.*?) contribution')
+    print(data)
+    datadatereg = re.compile(r'data-date="(.*?)" id="contribution-day-component')
+    datacountreg = re.compile(r'position-absolute">(.*?) contribution')
     datadate = datadatereg.findall(data)
     datacount = datacountreg.findall(data)
     datacount = list(map(int, [0 if i == "No" else i for i in datacount]))
@@ -41,3 +41,7 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(data).encode('utf-8'))
         return
+if __name__=="__main__":
+    server=HTTPServer(('localhost',8086),handler)
+    while 1:
+        server.handle_request()
