@@ -32,7 +32,7 @@ def getdata(name):
     return returndata
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        path=self.path[:-1]
+        path=self.path
         spl=path.split('?')[1:]
         for kv in spl:
             key,user=kv.split("=")
