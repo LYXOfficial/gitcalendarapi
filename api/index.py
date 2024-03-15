@@ -32,9 +32,12 @@ def getdata(name):
     return returndata
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        path = self.path
-        user = path.split('?')[1][:-1]
-        data = getdata(user)
+        path=self.path[:-1]
+        spl=path.split('?')[1:]
+        for kv in spl:
+            key,user=kv.split("=")
+            if key=="user": break
+        data=getdata(user)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
